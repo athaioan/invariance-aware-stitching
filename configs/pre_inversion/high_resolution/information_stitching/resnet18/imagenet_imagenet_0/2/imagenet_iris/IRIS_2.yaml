@@ -1,0 +1,111 @@
+arch_front: "resnet18"
+remove_residuals_front: False
+num_classes_front: 100
+
+arch_end: "resnet18"
+remove_residuals_end: False
+num_classes_end: 100
+
+front_model_weights: "${PATH_TO_BASELINES}/imagenet100/resnet18/2/checkpoint.pth"
+end_model_weights:  "${PATH_TO_BASELINES}/imagenet100/resnet18/0/checkpoint.pth"
+experiment_mode: "iris_generation"
+ablation_name: "preinversion_stitching_models_19_11"
+
+# Dataset
+dataset: "imagenet100"
+input_res: 'high'
+data_height: 224
+data_width: 224
+included_class_ratio: null
+dataset_ood: null
+
+# Backdoor
+backdoor: null
+backdoor_type: 'rand'
+backdoor_loc: 'class_specific'
+backdoor_noise: 0
+backdoor_first: False
+pixels_per_bit: 32
+
+# Robustness
+iris: True
+iris_attack_ratio: 1.0
+iris_epsilon: 4.758 
+iris_step_size: 0.09329411764 # 5 * 4.758/255
+iris_perturb_steps: 200 
+iris_min: [-2.118, -2.036, -1.804]
+iris_max: [2.249, 2.429, 2.64]
+return_iris_pair: False
+K_iris: null
+
+robust: null
+attack_ratio: 1.0
+epsilon: 0.07463529411 # 4 * 4.758/255
+step_size: 0.01865882352 # 1 * 4.758/255
+adv_min: [-2.118, -2.036, -1.804]
+adv_max: [2.249, 2.429, 2.64]
+eval_robustness: False
+
+
+## Stitching
+inverse_index: 2
+front_layer_index: null
+relative_front_index: True
+front_hook_post_relu: True
+end_hook_post_relu: True
+init_transform: 'pinv'
+K_init: 500
+bn_layers: False
+
+
+## Objective
+use_pcgrad: False
+fula_soft: False
+relative_betas: False
+beta_cls: 0.0
+beta_soft: 0.0
+beta_functional: 1.0
+beta_hint: 0.0
+
+direct_matching: False
+bn_running_stats: False
+funct_cutoff: null
+
+
+# Multi-crop arguments
+mc_global_number: 1
+mc_global_scale: [0.40, 1.0]
+mc_local_number: 8
+mc_local_scale: [0.05, 0.40]
+
+# Training/Optimization parameters
+optimizer: "adam"
+batch_size_per_gpu: 128
+epochs: 30
+wd: 1.0e-4
+lr: 0.001
+lr_decay: 0.1
+wd_regularize_all: True
+num_workers: 12
+
+
+
+# Wandb logging
+wandb: ${wandb_flag}
+wandb_project: ${wandb_project}
+wandb_entity: ${wandb_entity}
+
+# Misc
+dist_url: "env://"
+
+iris_data_dir: ${PATH_TO_IRIS_DATA}
+imagenet_data_dir: ${PATH_TO_IMAGENET_DATA}
+ls_imagenet_data_dir: ${PATH_TO_LS_IMAGENET_DATA}
+cifar_data_dir: ${PATH_TO_CIFAR_DATA}
+
+subset_txt: ${PATH_TO_SUBSET_TXT}
+output_dir: ${PATH_TO_OUTPUT_DIR}
+
+seed: 2
+
+

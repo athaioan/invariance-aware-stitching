@@ -1,0 +1,69 @@
+# config.yml
+arch: "vit_base_patch16_224"
+remove_residuals: False
+experiment_mode: "baseline"
+train_objective: "supervised" # supervised, simclr
+ablation_name: "baselines_models"
+
+# Dataset
+dataset: "imagenetB100"
+input_res: 'high'
+data_height: 224
+data_width: 224
+num_classes: 100
+included_class_ratio: null
+K_init: null
+dataset_ood: null
+
+# Backdoor
+backdoor: null
+backdoor_type: 'rand'
+backdoor_loc: 'class_specific'
+backdoor_noise: 0
+backdoor_first: False
+pixels_per_bit: 32
+
+# Robustness
+robust: null
+attack_ratio: 0.0
+epsilon: 0.07463529411 # 4 * 4.758/255
+step_size: 0.01865882352 # 1 * 4.758/255
+adv_min: [-2.118, -2.036, -1.804]
+adv_max: [2.249, 2.429, 2.64]
+eval_robustness: False
+
+# Multi-crop arguments
+mc_global_number: 1
+mc_global_scale: [0.40, 1.0]
+mc_local_number: 8
+mc_local_scale: [0.05, 0.40]
+
+# Training/Optimization parameters
+optimizer: "sgd"
+nesterov: True
+batch_size_per_gpu: 256
+epochs: 200
+wd: 1.0e-4
+lr: 0.01
+warmup_epochs: 0
+min_lr: 1.0e-6
+wd_regularize_all: True
+scheduler: "step"
+lr_decay: 0.1
+num_workers: 12
+
+# Wandb logging
+wandb: ${wandb_flag}
+wandb_project: ${wandb_project}
+wandb_entity: ${wandb_entity}
+
+# Misc
+imagenet_data_dir: ${PATH_TO_IMAGENET_DATA}
+ls_imagenet_data_dir: ${PATH_TO_LS_IMAGENET_DATA}
+cifar_data_dir: ${PATH_TO_CIFAR_DATA}
+
+subset_txt: ${PATH_TO_SUBSET_TXT}
+output_dir: ${PATH_TO_OUTPUT_DIR}
+saveckpt_freq: 100
+seed: 1
+dist_url: "env://"

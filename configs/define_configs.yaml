@@ -1,0 +1,14 @@
+# define paths
+PATH_TO_IMAGENET_DATA: "/path/to/imagenet/data/ImageNet_2012"
+PATH_TO_LS_IMAGENET_DATA: "/path/to/ls_imagenet/data/ImageNet_2012_low_res"
+PATH_TO_CIFAR_DATA: "/path/to/data"
+
+PATH_TO_IRIS_DATA: "/path/to/iris/data/iris_data"
+
+PATH_TO_SUBSET_TXT: "./data"
+PATH_TO_OUTPUT_DIR: "/path/to/output_dir"
+
+# wandb
+wandb_flag: False
+wandb_project: "wandb_project"
+wandb_entity: "wandb_entity"
